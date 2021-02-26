@@ -3,12 +3,6 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import UserManager, PermissionsMixin
 from django.utils import timezone
 
-# Create your models here.
-from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import UserManager, PermissionsMixin
-from django.utils import timezone
-
 
 class UserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -39,7 +33,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('メールアドレス', unique=True)
     first_name = models.CharField(('姓'), max_length=30)
     last_name = models.CharField(('名'), max_length=30)
-    department = models.CharField(('所属'), max_length=30, blank=True)
+    address = models.CharField(('住所'), max_length=30, blank=True) # 追加
+    tel = models.CharField(('電話番号'), max_length=30, blank=True) # 追加
     created = models.DateTimeField(('入会日'), default=timezone.now)
 
     is_staff = models.BooleanField(
